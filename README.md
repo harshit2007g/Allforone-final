@@ -1,1 +1,1 @@
-
+This web app is a crowdfunding project that lets you simulate actual blockchain transactions on the sepolia testnet. You can create campaigns here, the campaigns are shown directly on the website, all the data is stored in the firebase database. The transactions are also stored in the db. 
