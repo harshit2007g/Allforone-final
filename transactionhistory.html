@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Campaign Transaction History</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="icon" type="image/png" href="images/Logo.png">
+    <script type="module" src="history.js"></script>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --background: #f8fafc;
+            --card: #ffffff;
+            --text: #0f172a;
+            --muted: #64748b;
+            --border: #e2e8f0;
+            --success: #16a34a;
+        }
+
+        * {
+            box-sizing: border-box;
+            font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont;
+        }
+
+        body {
+            margin: 0;
+            background: var(--background);
+            color: var(--text);
+            padding: 40px 16px;
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        .header {
+            margin-top: 60px;
+            margin-bottom: 24px;
+            font-size: large;
+        }
+
+        .header h1 {
+            font-size: 40px;
+            margin-bottom: 6px;
+            margin-top: 50px;
+        }
+
+        .header p {
+            color: var(--muted);
+            font-size: 15px;
+        }
+
+        /* Campaign Summary */
+        .summary {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .summary-item h3 {
+            font-size: 14px;
+            color: var(--muted);
+            margin-bottom: 4px;
+        }
+
+        .summary-item p {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        /* Table */
+        .table-wrapper {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        thead {
+            background: #f1f5f9;
+        }
+
+        th,
+        td {
+            padding: 14px 36px;
+            text-align: left;
+            font-size: 14px;
+        }
+
+        th {
+            font-weight: 600;
+            color: #334155;
+        }
+
+        tr:not(:last-child) td {
+            border-bottom: 1px solid var(--border);
+        }
+
+        th:nth-child(1),
+        td:nth-child(1) {
+            width: 220px;
+        }
+
+        th:nth-child(2),
+        td:nth-child(2) {
+            width: 220px;
+        }
+
+        th:nth-child(3),
+        td:nth-child(3) {
+            width: 120px;
+        }
+
+        th:nth-child(4),
+        td:nth-child(4) {
+            width: 260px;
+        }
+
+        .hash {
+            font-family: monospace;
+            font-size: 13px;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .amount {
+            font-weight: 600;
+            color: var(--success);
+        }
+
+        .address {
+            font-family: monospace;
+            font-size: 13px;
+            color: #475569;
+        }
+
+        .date {
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .summary {
+                grid-template-columns: 1fr;
+            }
+
+            table {
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <header class="navbar">
+            <div class="nav-logo">
+                <span class="logo-mark">A</span>
+
+                <a href="index.html">
+                    <span class="logo-text">AllForOne</span>
+                </a>
+
+
+
+            </div>
+            <nav class="nav-links">
+                <a href="index.html#campaigns">Campaigns</a>
+                <a href="index.html#how-it-works">How It Works</a>
+                <a href="index.html#footer">Contact</a>
+
+
+            </nav>
+            <a><button class="nav-cta" id="start">Start a Campaign</button>
+            </a>
+    </div>
+    <div class="container">
+
+        <!-- Header -->
+        <div class="header">
+            <h1>Transaction History</h1>
+        </div>
+        <div id="campaign-name" class="header">
+
+        </div>
+
+        <!-- Campaign Summary -->
+        <div class="summary">
+            <div class="summary-item">
+                <h3>Total money raised (in ₹)</h3>
+                <p id="raised"></p>
+            </div>
+            <div class="summary-item">
+                <h3>Total Donations</h3>
+                <p id="supporters"></p>
+            </div>
+            <div class="summary-item">
+                <h3>Campaign Goal (in ₹) </h3>
+                <p id="goal"></p>
+            </div>
+        </div>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Transaction Hash</th>
+                        <th>Donor Address</th>
+                        <th>Amount (in ₹) </th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+        <!-- Transaction Table -->
+        <div id="donationList" class="table-wrapper">
+            <table>
+
+                <tbody>
+                    <tr>
+                        <td id="hash" class="hash">
+                        </td>
+                        <td id="address" class="address"></td>
+                        <td id="amount" class="amount"></td>
+                        <td id="date" class="date"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+</body>
+
+</html>

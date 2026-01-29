@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Campaign Details – AllForOne</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" type="image/png" href="images/Logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet" />
+
+  <script src="script.js" defer></script>
+  <script type="module" src="googleauth.js"></script>
+  <script type="module" src="campaigndetail.js"></script>
+</head>
+
+<body>
+
+  <header class="navbar">
+    <div class="nav-logo">
+      <span class="logo-mark">A</span>
+      <a href="index.html">
+        <span class="logo-text">AllForOne</span>
+      </a>
+    </div>
+
+    <nav class="nav-links">
+      <a href="index.html#campaigns" class="active">Campaigns</a>
+      <a href="index.html#how-it-works">How It Works</a>
+    </nav>
+
+    <button class="nav-cta">Start a Campaign</button>
+    <button class="nav-cta" id="googleLogin">Login</button>
+  </header>
+
+  <main class="campaign-detail-page">
+    <section class="campaign-detail-card fade-in-on-load">
+
+      <!-- Banner Image -->
+      <div class="campaign-detail-banner">
+        <img id="campaignImage" src="" alt="Campaign image" class="campaign-detail-image" />
+      </div>
+
+      <!-- Header -->
+      <div class="campaign-detail-header">
+        <span id="campaignCategory" class="campaign-tag ">
+
+        </span>
+
+        <h1 id="campaignTitle">
+        </h1>
+        <p id="campaignLocation" class="campaign-detail-location">
+        </p>
+      </div>
+
+      <div class="campaign-detail-body">
+        <div class="campaign-detail-main">
+
+          <h2>About this campaign</h2>
+          <p id="campaignDescription">
+          </p>
+
+          <h3>Why this matters</h3>
+          <p id="campaignWhy" class="campaign-detail-list">
+        </p>
+          
+
+
+        </div>
+
+        <!-- Side Panel -->
+        <aside class="campaign-detail-side">
+          <div class="campaign-progress-box">
+
+            <div class="campaign-progress">
+              <div class="progress-bar big">
+                <div id="progressFill" class="progress-fill" style="width: 0%;"></div>
+              </div>
+
+              <div class="progress-info progress-info-detail">
+                <span>
+                  <strong id="raisedAmount">₹ 0</strong> raised
+                </span>
+                <span>
+                  of <span id="goalAmount">₹ 0</span> goal
+                </span>
+              </div>
+            </div>
+
+            <p id="campaignStats" class="campaign-supporters">
+              0 supporters · 0 days left
+            </p>
+
+            
+              <button id="donate" class="btn-primary donate-btn">
+                Donate Now
+              </button>
+         
+
+           <button id="history" class="btn-primary donate-transaction">
+              Transaction history
+            </button>
+          </div>
+
+          <div class="campaign-side-info">
+            <h4>Campaign created by</h4>
+            <p>
+              <strong id="campaignCreator">
+
+              </strong>
+            </p>
+            <p id="campaignCreatorMeta">
+
+            </p>
+          </div>
+        </aside>
+      </div>
+      </section>
+  </main>
+
+  <footer class="footer simple-footer">
+    <div class="footer-bottom">
+      <span>© 2025 AllForOne. All of us, for each one.</span>
+    </div>
+  </footer>
+
+</body>
+
+</html>

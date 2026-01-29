@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title >Allforone– Crowdfunding for Unity & Impact</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="images/Logo.png">
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet" />
+  <script src="script.js" defer></script>
+  <!-- Firebase core + Auth (modular) -->
+  <script type="module" src="googleauth.js"></script>
+</head>
+
+<body>
+  <!-- Top navigation -->
+  <header class="navbar">
+    <div class="nav-logo">
+      <span class="logo-mark">A</span>
+
+      <a href="index.html">
+        <span class="logo-text">AllForOne</span>
+      </a>
+
+
+
+    </div>
+    <nav class="nav-links">
+      <a href="#campaigns">Campaigns</a>
+      <a href="#how-it-works">How It Works</a>
+      <a href="#footer">Contact</a>
+
+
+    </nav>
+    <a><button class="nav-cta" id="start">Start a Campaign</button></a>
+    <button class="nav-cta" id="googleLogin">Continue with Google</button>
+    <a href="analytics.html"><button class="nav-cta">Campaign Analytics</button></a>
+    <button class="nav-cta" id="logoutBtn">Logout</button>
+
+  </header>
+
+  <!-- Hero / Front page -->
+  <section class="hero">
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content fade-in-on-load">
+      <p class="hero-tag">AllForOne • Unity • Change</p>
+      <h1 class="hero-title">
+        AllForOne
+      </h1>
+      <p class="hero-quote">
+        “All for one, one for all — when we unite, every cause finds its strength.”
+      </p>
+
+      <div class="hero-buttons">
+        <a href="#campaigns" class="btn-primary">Explore Campaigns</a>
+        <a href="#how-it-works" class="btn-secondary">How It Works</a>
+      </div>
+
+      <div class="hero-stats">
+        <div class="stat-card">
+          <span class="stat-number">100+</span>
+          <span class="stat-label">Active Campaigns all around world connecting and providing help to those in
+            need.</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-number">₹ 25L+</span>
+          <span class="stat-label">Raised Together for the people in need.</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-number">20K+</span>
+          <span class="stat-label">People United for each other in times of need.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="scroll-indicator">
+      <span>Scroll to see campaigns</span>
+      <div class="scroll-dot"></div>
+    </div>
+  </section>
+
+  <!-- Ongoing Campaigns Sneak Peek -->
+  <section id="campaigns" class="section campaigns-section">
+    <div class="section-header reveal-on-scroll">
+      <h2>Ongoing Campaigns</h2>
+      <p>Get a quick sneak peek. Click any campaign to see full details or donate.</p>
+    </div>
+
+    <div class="campaign-grid">
+    </div>
+    <div id="campaignList" class="campaign-grid"></div>
+  </section>
+
+  <!-- How it works section -->
+  <section id="how-it-works" class="section how-section">
+    <div class="section-header reveal-on-scroll">
+      <h2>How AllForOne Works</h2>
+      <p>We are a Crowdfunding platform where anyone can doante to people in need around the world and also you can
+        create a campaign for people to help them financially.
+      </p>
+    </div>
+
+    <div class="steps-grid">
+      <div class="step-card reveal-on-scroll">
+        <span class="step-number">1</span>
+        <h3>Start Campaigns</h3>
+        <p>Create a campaign to spread awareness about someone in need and help them get the required financial support.
+        </p>
+      </div>
+      <div class="step-card reveal-on-scroll">
+        <span class="step-number">2</span>
+        <h3>Support Safely</h3>
+        <p>Donate in just a few clicks, with the option of crypto currency so all your support is fully received by the
+          person in need with full transparency.</p>
+      </div>
+      <div class="step-card reveal-on-scroll">
+        <span class="step-number">3</span>
+        <h3>Track the Impact</h3>
+        <p>Stay updated with progress bars, milestones, and community updates.Know how your started campaign is doing
+          with all the transaction history as well.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer id="footer" class="footer">
+    <div class="footer-main">
+      <div>
+        <h3>AllForOne</h3>
+        <p>Bringing everyone together so no cause stands alone.</p>
+      </div>
+      <div>
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#campaigns">Ongoing Campaigns</a></li>
+          <li><a href="#how-it-works">How It Works</a></li>
+          <li><a href="createcampaign.html">Start a Campaign</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Stay Connected</h4>
+        <ul>
+          <li><a href="https://www.instagram.com/ig_harshit_06/">Instagram</a></li>
+          <li><a href="https://wa.me/7991503911" target="_blank">Whatsapp</a></li>
+          <li><a href="https://mail.google.com/mail/?view=cm&fs=1&to=harshitrai004@gmail.com"  target="_blank">Email Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 AllForOne. All of us, for each one.</span>
+    </div>
+  </footer>
+  <!-- Donate Overlay (Hidden by default) -->
+  <div class="donate-overlay hidden" id="donateOverlay">
+    <div class="donate-panel">
+      ...
+    </div>
+  </div>
+  <script type="module" src="campaigns.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Campaign Analytics</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="icon" type="image/png" href="images/Logo.png">
+    
+    <style>
+        :root {
+            --bg: #f8fafc;
+            --panel: #ffffff;
+            --card: #f1f5f9;
+            --muted: #64748b;
+            --text: #0f172a;
+            --accent: #4f46e5;
+            --success: #16a34a;
+            --border: rgba(15, 23, 42, 0.08);
+        }
+
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Inter", sans-serif;
+        }
+
+        body {
+            background: linear-gradient(120deg, #f8fafc, #eef2ff);
+            color: var(--text);
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 240px 1fr;
+        }
+
+        /* Sidebar */
+        aside {
+            background: #ffffff;
+            border-right: 1px solid var(--border);
+            padding: 28px 20px;
+        }
+
+        aside h2 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 32px;
+        }
+
+        aside nav a {
+            display: block;
+            color: var(--muted);
+            text-decoration: none;
+            padding: 12px 14px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            transition: 0.25s;
+        }
+
+        aside nav a.active,
+        aside nav a:hover {
+            background: rgba(79, 70, 229, 0.12);
+            color: var(--accent);
+        }
+
+        /* Main */
+        main {
+            padding: 32px 36px;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 32px;
+        }
+
+        header h1 {
+            font-size: 26px;
+            font-weight: 700;
+        }
+
+        header span {
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        /* KPI Cards */
+        .kpis {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 22px;
+            margin-bottom: 36px;
+        }
+
+        .kpi {
+            background: linear-gradient(180deg, #ffffff, #f8fafc);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 22px;
+        }
+
+        .kpi h4 {
+            font-size: 13px;
+            color: var(--muted);
+            margin-bottom: 8px;
+        }
+
+        .kpi p {
+            font-size: 26px;
+            font-weight: 700;
+        }
+
+        /* Table */
+        .panel {
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        thead {
+            background: #f1f5f9;
+        }
+
+        th,
+        td {
+            padding: 16px;
+            text-align: left;
+            font-size: 14px;
+        }
+
+        th {
+            color: var(--muted);
+            font-weight: 500;
+        }
+
+        tbody tr {
+            border-top: 1px solid var(--border);
+            transition: background 0.25s;
+        }
+
+        tbody tr:hover {
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .progress {
+            height: 8px;
+            background: #e5e7eb;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .progress span {
+            display: block;
+            height: 100%;
+            background: linear-gradient(90deg, #6366f1, #22c55e);
+        }
+
+        .status {
+            color: var(--success);
+            font-weight: 600;
+            font-size: 13px;
+        }
+
+        @media (max-width: 900px) {
+            body {
+                grid-template-columns: 1fr;
+            }
+
+            aside {
+                display: none;
+            }
+        }
+
+        .my-campaigns-page {
+            padding: 32px;
+        }
+
+        .page-header {
+            margin-bottom: 24px;
+        }
+
+        .page-header h1 {
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        .page-header p {
+            color: #6b7280;
+            margin-top: 4px;
+        }
+
+        .campaign-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+            gap: 24px;
+        }
+
+        /* Modal */
+
+        .modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.45);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 50;
+        }
+
+        .modal.hidden {
+            display: none;
+        }
+
+        .modal-card {
+            width: 520px;
+            background: #fff;
+            border-radius: 14px;
+            padding: 20px;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h3 {
+            font-size: 18px;
+        }
+
+        .modal-header button {
+            background: none;
+            border: none;
+            font-size: 22px;
+            cursor: pointer;
+        }
+
+        .modal-body {
+            margin-top: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .modal-body label {
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .modal-body textarea {
+            resize: vertical;
+            padding: 10px;
+            border-radius: 10px;
+            border: 1px solid #e5e7eb;
+            font-family: inherit;
+        }
+
+        .modal-footer {
+            margin-top: 18px;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .primary-btn {
+            background: #6366f1;
+            color: #fff;
+            padding: 10px 16px;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!--sidebar-->
+    <aside>
+        <h2>Dashboard</h2>
+        <nav>
+            <a class="active">Analytics</a>
+        </nav>
+    </aside>
+
+    <!-- main -->
+    <main>
+        <header>
+            <div>
+                <h1>Your Campaign Analytics</h1>
+                <span>Performance overview of campaigns you created</span>
+            </div>
+        </header>
+
+        <!-- data  -->
+        <section class="kpis">
+            <div class="kpi">
+                <h4>Total Raised</h4>
+                <p id="kpi-total"></p>
+            </div>
+            <div class="kpi">
+                <h4>Active Campaigns</h4>
+                <p id="kpi-active"></p>
+            </div>
+            <div class="kpi">
+                <h4>Total Donors</h4>
+                <p id="kpi-supporters"></p>
+            </div>
+            <div class="kpi">
+                <h4>Avg Donation</h4>
+                <p id="kpi-average"></p>
+            </div>
+        </section>
+
+        <!-- Campaign Table -->
+        <section class="panel">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Campaign</th>
+                        <th>Raised</th>
+                        <th>Goal</th>
+                        <th>Progress</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="campaignTable">
+                </tbody>
+            </table>
+        </section>
+
+    </main>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import {
+            getFirestore,
+            collection,
+            query,
+            where,
+            getDocs
+        } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyBxMhTmYG11-1SHBkbfasBccWWfIU4WSa4",
+            authDomain: "cyber-labs-6f3a1.firebaseapp.com",
+            projectId: "cyber-labs-6f3a1"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const auth = getAuth(app);
+
+        onAuthStateChanged(auth, async (user) => {
+            if (!user) {
+                alert("Please login to view analytics");
+               window.location.href = "index.html";
+            }
+            console.log(user.email);
+            loadAnalytics(user.email);
+        });
+
+        async function loadAnalytics(email) {
+            const q = query(
+                collection(db, "INFORMATION"),
+                where("email", "==", email)
+            );
+
+            const snapshot = await getDocs(q);
+
+            let raisedAmount = 0;
+            let activeCampaigns = 0;
+            let campaignCount = 0;
+            let Donors = 0;
+
+            const table = document.getElementById("campaignTable");
+            table.innerHTML = "";
+
+            for (const docSnap of snapshot.docs) {
+                const c = docSnap.data();
+
+                campaignCount++;
+                Donors += c.supporters || 0;
+                raisedAmount += c.raisedAmount || 0;
+                if (c.status === "active") activeCampaigns++;
+
+                const progress = Math.min(
+                    Math.round((c.raisedAmount / c.goalAmount) * 100),
+                    100
+
+                );
+
+
+                table.innerHTML += `
+      <tr>
+        <td>${c.title}</td>
+        <td>₹ ${c.raisedAmount.toLocaleString()}</td>
+        <td>₹ ${c.goalAmount.toLocaleString()}</td>
+        <td>
+          <div class="progress">
+            <span style="width:${progress}%"></span>
+          </div>
+        </td>
+        <td class="status">${c.status}</td>
+      </tr>
+    `;
+
+            }
+            const average = Math.round(raisedAmount / Donors);
+
+            document.getElementById("kpi-total").textContent =
+                `₹ ${raisedAmount.toLocaleString()}`;
+            document.getElementById("kpi-active").textContent =
+                activeCampaigns;
+            document.getElementById("kpi-supporters").textContent =
+                Donors;
+            document.getElementById("kpi-average").textContent =
+                `₹ ${average.toLocaleString()}`;
+        }
+        //analytics page ^^^^^
+
+    </script>
+
+</body>
+
+</html>

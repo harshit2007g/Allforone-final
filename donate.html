@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Donate</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+
+  <link rel="icon" type="image/png" href="images/Logo.png">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: "Inter", sans-serif;
+    }
+
+    body {
+      margin: 0;
+      background: #f8fafc;
+      color: #111827;
+    }
+
+    /* Page container */
+    .donate-container {
+      margin-left: -500vh;
+      margin-right: 55vh;
+      margin-bottom: -100vh;
+      background: white;
+      padding: 27px 32px;
+      border-radius: 75px;
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.08);
+      z-index: 100px;
+    }
+
+    /* Campaign name */
+    .campaign-name {
+      font-size: 28px;
+      font-weight: 800;
+      margin-bottom: 8px;
+      text-align: center;
+    }
+
+    .campaign-sub {
+      text-align: center;
+      font-size: 14px;
+      color: #6b7280;
+      margin-bottom: 30px;
+    }
+
+    /* Amount input */
+    .amount-section label {
+      font-weight: 600;
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    .amount-box {
+      display: flex;
+      align-items: center;
+      border: 2px solid #e5e7eb;
+      border-radius: 10px;
+      padding: 14px 16px;
+      margin-bottom: 28px;
+    }
+
+    .amount-box input {
+      border: none;
+      outline: none;
+      font-size: 22px;
+      font-weight: 700;
+      flex: 1;
+    }
+
+    .currency {
+      font-weight: 700;
+      color: #4b5563;
+    }
+
+    /* Payment section */
+    .payment-title {
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+
+    .payment-option {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      border: 2px solid #bdb5b5;
+      padding: 14px;
+      border-radius: 999px;
+      cursor: pointer;
+      margin-bottom: 14px;
+      transition: ease-out;
+      margin-left: 10px;
+    }
+
+    .payment-option:hover {
+      background: linear-gradient(135deg, #4c6fff, #9b6bff);
+      transform: translateY(-5px);
+      box-shadow: 0 10px 10px #697ed5;
+
+      .payment-text {
+        color: white;
+      }
+    }
+
+    .payment-option input {
+      display: none;
+    }
+
+    .payment-option.selected {
+      background: linear-gradient(135deg, #4c6fff, #9b6bff);
+    }
+
+    .payment-option img {
+      width: 60px;
+      height: 20px;
+    }
+
+    .payment-text {
+      font-weight: 600;
+      width: 290px;
+      padding-right: 45px;
+    }
+
+    .payment-option.metamask {
+      z-index: 5px;
+    }
+
+    /* Donate button */
+    .donate-btn {
+      width: 100%;
+      margin-top: 28px;
+      padding: 16px;
+      font-size: 16px;
+      font-weight: 800;
+      background: #111827;
+      color: #ffffff;
+      border: none;
+      border-radius: 999px;
+      cursor: pointer;
+
+    }
+
+
+
+    .donate-btn:hover {
+      background: linear-gradient(110deg, darkblue, purple);
+
+    }
+
+    .connect-btn {
+      width: 100%;
+      margin-top: 28px;
+      padding: 16px;
+      font-size: 16px;
+      font-weight: 800;
+      background: #111827;
+      color: #ffffff;
+      border: none;
+      border-radius: 999px;
+      cursor: pointer;
+      display: none;
+    }
+
+    .connect-btn:hover {
+      background: linear-gradient(110deg, darkblue, purple);
+      transition: linear;
+    }
+
+    .connect-btn.is-hidden {
+      display: inline-block;
+    }
+
+    /* Footer note */
+    .secure-note {
+      margin-top: 18px;
+      font-size: 12px;
+      color: #6b7280;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <header class="navbar">
+    <div class="nav-logo">
+      <span class="logo-mark">A</span>
+
+      <a href="index.html">
+        <span class="logo-text">AllForOne</span>
+      </a>
+      <nav class="nav-links nav-links--donate">
+        <a href="index.html#campaigns">Campaigns</a>
+        <a href="index.html#how-it-works">How It Works</a>
+
+
+      </nav>
+      <a href="createcampaign.html"> <button class="nav-cta nav-cta--donate">Start a Campaign</button>
+      </a>
+
+
+    </div>
+    <div class="donate-container">
+
+      <!-- Campaign Context -->
+      <div class="logo-text logo-text--donate">
+        AllForOne
+
+      </div>
+      <div class="campaign-sub">
+        Your contribution makes a real impact
+      </div>
+
+      <!-- Amount Input -->
+      <div class="amount-section">
+        <label>Donation Amount</label>
+        <div class="amount-box">
+          <input id="donationAmount" type="number" placeholder="0.00" step="0.001" />
+          <span class="currency">SEPOLIA</span>
+        </div>
+      </div>
+
+      <!-- Payment Methods -->
+      <div class="payment-title">Choose Payment Method</div>
+
+      <div> <button class="payment-option" data-method="upi">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/e/e1/UPI-Logo-vector.svg" alt="UPI">
+          <div class="payment-text">UPI</div>
+        </button>
+      </div>
+
+      <div> <button class="payment-option payment-option--metamask" data-method="metamask">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/3/36/MetaMask_Fox.svg" alt="MetaMask">
+          <div class="payment-text">Metamask</div>
+        </button>
+
+      </div>
+      <button class="connect-btn">Connect to wallet</button>
+      <p id="walletStatus"></p>
+      <!-- Action Button -->
+
+      <button class="donate-btn ">Proceed to Donate</button>
+      <p id="txStatus"></p>
+
+      <div class="secure-note">
+        Secure payments • Powered by UPI & Blockchain
+      </div>
+      <div id="txOverlay" class="tx-overlay hidden">
+        <div class="tx-modal">
+          <div class="tx-icon">✓</div>
+          <h2>Thank you for donating</h2>
+          <p>Your transaction has been successfully approved.</p>
+
+          <button id="viewTxBtn" class="tx-btn">
+            View transaction history
+          </button>
+        </div>
+      </div>
+
+    </div>
+    <!-- Transaction Success Popup -->
+
+
+    <script type="module">
+      // Highlight selected payment method
+      const options = document.querySelectorAll(".payment-option--metamask");
+
+      options.forEach(opt => {
+        opt.addEventListener("click", () => {
+          options.forEach(o => o.classList.remove("selected"));
+          opt.classList.add("selected");
+          opt.addEventListener("click", () => {
+            options.forEach(o => o.classList.remove("selected"));
+          });
+        });
+      });
+
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const paymentBtn = document.querySelector(".payment-option--metamask");
+        const connectBtn = document.querySelector(".connect-btn");
+        const voidbtn = document.querySelector(".payment-option");
+        if (!paymentBtn || !connectBtn) return;
+
+        paymentBtn.addEventListener("click", () => {
+          connectBtn.classList.toggle("is-hidden");
+
+        });
+
+      });
+      document.addEventListener("DOMContentLoaded", () => {
+        const connectBtn = document.querySelector(".connect-btn");
+        const statusText = document.getElementById("walletStatus");
+
+        if (!connectBtn) return;
+
+        connectBtn.addEventListener("click", async () => {
+          // Check if MetaMask is installed
+          if (typeof window.ethereum === "undefined") {
+            statusText.textContent = "MetaMask is not installed.";
+            return;
+          }
+
+          try {
+            // Request wallet connection
+            const accounts = await window.ethereum.request({
+              method: "eth_requestAccounts"
+            });
+
+            const walletAddress = accounts[0];
+
+            // Show connected address
+            statusText.textContent =
+              "Connected wallet: " +
+              walletAddress.slice(0, 6) +
+              "..." +
+              walletAddress.slice(-4);
+
+            // Optional: disable button after connect
+            connectBtn.disabled = true;
+            connectBtn.textContent = "Wallet Connected";
+
+          } catch (error) {
+            // User rejected or error occurred
+            statusText.textContent = "Wallet connection rejected.";
+            console.error(error);
+          }
+        });
+      });
+      function showTransactionSuccess(campaignId) {
+        const overlay = document.getElementById("txOverlay");
+        const viewTxBtn = document.getElementById("viewTxBtn");
+
+        overlay.classList.remove("hidden");
+
+        viewTxBtn.onclick = () => {
+          window.location.href = `transactionhistory.html?id=${campaignId}`;
+        };
+      }
+
+      // Import Firebase functions
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+      import { getFirestore } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+      import { doc, getDoc, updateDoc, increment } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+      // Your Firebase configuration
+      const firebaseConfig = {
+        apiKey: "AIzaSyBxMhTmYG11-1SHBkbfasBccWWfIU4WSa4",
+        authDomain: "cyber-labs-6f3a1.firebaseapp.com",
+        projectId: "cyber-labs-6f3a1",
+        storageBucket: "cyber-labs-6f3a1.firebasestorage.app",
+        messagingSenderId: "93943160178",
+        appId: "1:93943160178:web:6cae531bf06189462e11eb"
+      };
+
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+
+      // Initialize Firestore
+      const db = getFirestore(app);
+
+
+      // db is now your Firestore reference
+      const params = new URLSearchParams(window.location.search);
+      const campaignId = params.get("id");
+
+      if (!campaignId) {
+        alert("Invalid campaign link");
+        throw new Error("Campaign ID missing from URL");
+      }
+
+      async function getCampaignWallet(campaignId) {
+        const campaignRef = doc(db, "INFORMATION", campaignId);
+        const snapshot = await getDoc(campaignRef);
+
+        if (!snapshot.exists()) {
+          throw new Error("Campaign not found");
+        }
+
+        return snapshot.data().address;
+      }
+
+
+
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const donateBtn = document.querySelector(".donate-btn");
+        const amountInput = document.getElementById("donationAmount");
+        const statusText = document.getElementById("txStatus");
+
+        // 🔴 REPLACE THIS WITH receiver's ADDRESS
+        let RECEIVER_ADDRESS;
+
+        async function initDonation() {
+          try {
+            RECEIVER_ADDRESS = await getCampaignWallet(campaignId);
+            console.log("Using campaign wallet:", RECEIVER_ADDRESS);
+          } catch (err) {
+            console.error(err);
+            alert("Unable to load campaign wallet");
+          }
+        }
+
+        initDonation();
+
+        // sepolia testnt 
+        const sepolia_id = "0xaa36a7";
+
+        donateBtn.addEventListener("click", async () => {
+
+          // Check wallet
+          if (!window.ethereum) {
+            statusText.textContent = "MetaMask is not installed.";
+            return;
+          }
+
+
+          const amount = amountInput.value.trim();
+
+          if (!amount || isNaN(amount) || Number(amount) <= 0) {
+            alert("Enter a valid donation amount");
+            return;
+          }
+
+          try {
+            // Get connected account
+            const accounts = await window.ethereum.request({
+              method: "eth_accounts"
+            });
+
+            if (!accounts.length) {
+              statusText.textContent = "Wallet not connected.";
+              return;
+            }
+
+            const fromAddress = accounts[0];
+            console.log("Connected sender:", fromAddress);
+            if (!fromAddress) {
+              alert("Please wait for the metamask to connect!");
+              return;
+            }
+            // Ensure sepolia testnet
+            const currentChain = await window.ethereum.request({
+              method: "eth_chainId"
+            });
+
+            if (currentChain !== sepolia_id) {
+              await window.ethereum.request({
+                method: "wallet_switchEthereumChain",
+                params: [{ chainId: sepolia_id }]
+              });
+            }
+
+            // Convert sepolia -> hex
+            const value = "0x" +
+              BigInt(Math.floor(Number(amount) * 1e18)).toString(16);
+            //testing
+            console.log({
+              rawAmount: amountInput.value,
+              parsedAmount: amount,
+              value,
+              valueType: typeof value
+
+            });
+            //
+
+            // Send transaction
+            const txHash = await window.ethereum.request({
+              method: "eth_sendTransaction",
+              params: [{
+
+                from: fromAddress,
+                to: RECEIVER_ADDRESS,
+                value,
+              }]
+            });
+
+            // After successful donation transaction
+            if (txHash !== null) {
+              showTransactionSuccess(campaignId);
+            }
+            statusText.textContent = "Transaction sent. Hash: " + txHash.slice(0, 6) + "..." + txHash.slice(-4);
+            // for updating raised amount
+            await updateDoc(doc(db, "INFORMATION", campaignId), {
+              raisedAmount: increment(Number(amount) * (10 ** 7)),
+              supporters: increment(1)
+            });
+            //for updating raised amount
+          } catch (error) {
+            console.error("MetaMask error:", error);
+            alert(error.message || "Transaction failed");
+          }
+
+        });
+      });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Create Campaign — Cyber Labs</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" type="image/png" href="images/Logo.png">
+
+</head>
+
+<body>
+  <header class="navbar">
+    <div class="nav-logo">
+      <span class="logo-mark">A</span>
+
+      <a href="index.html">
+        <span class="logo-text">AllForOne</span>
+      </a>
+
+    </div>
+    <nav class="nav-links">
+      <a href="index.html#campaigns">Campaigns</a>
+      <a href="index.html#how-it-works">How It Works</a>
+      <a href="index.html#footer">Contact</a>
+
+
+    </nav>
+  </header>
+  <section class="campaign">
+    <div class="campaign"></div>
+
+    <div class="campaign-content fade-in-on-load">
+      <p class="campaign-tag">AllForOne • Unity • Change</p>
+      <h1 class="campaign-title">
+        CREATE CAMPAIGN
+      </h1>
+      <h6 class="campaign-ask">Who are you?</h6>
+      <input type="text" id="about" placeholder="Let us know you">
+      <h7 class="campaign-ask">Enter your email </h7>
+      <input type="text" id="email" placeholder="abc123@gmail.com">
+      <h7 class="campaign-ask">Where do you live?</h7>
+      <input type="text" id="where" placeholder="Your address">
+      <h2 class="campaign-ask">What is the type of your campaign?</h2>
+      <select id="category">
+        <option value="Education">Education</option>
+        <option value="Health">Healthcare</option>
+        <option value="Infrastructure">Infrastructure</option>
+        <option value="Personal">Personal</option>
+        <option value="Others">Others</option>
+      </select>
+
+      <h3 class="campaign-ask">Give the title to the campaign:</h3>
+      <input type="text" id="title" placeholder="Enter the title of the campaign">
+
+      <h4 class="campaign-ask">Tell us about your campaign:</h4>
+      <textarea id="description" rows="5" cols="30" placeholder="Describe your campaign"></textarea>
+
+      <h5 class="campaign-ask">Convey the importance of your campaign:</h5>
+      <textarea id="importance" rows="5" cols="30" placeholder="Importance of your campaign"></textarea>
+
+      <h7 class="campaign-ask">Give us a summary for your campaign:</h7>
+      <textarea id="summary" rows="1" cols="10" placeholder="A short summary for your campaign"></textarea>
+
+      <h6 class="campaign-ask">Amount of money you want to raise:</h6>
+      <input type="number" id="goalAmount" min="10000" max="10000000000" step="10000"
+        placeholder="The amount is in rupees.">
+
+      <h6 class="campaign-ask">Minimum time you want to run this campaign:</h6>
+      <input type="number" id="duration" min="10" max="1000" step="10" placeholder="Enter number of days.">
+
+      <h6 class="campaign-ask">Submit a related photo towards your campaign:</h6>
+      <input type="file" id="campaignImage" accept="image/*">
+
+
+      <button id="connectWalletBtn" class="btn-primary btn-primary--create">
+        Connect Wallet
+      </button>
+      <input type="text" id="walletAddressInput" placeholder="Wallet Address" class="campaign-ask" readonly>
+      <button id="submitCampaign" class="btn-primary ">
+        Submit
+      </button>
+    </div>
+  </section>
+
+
+  <script>
+
+    const connectBtn = document.getElementById("connectWalletBtn");
+    const walletInput = document.getElementById("walletAddressInput");
+
+    connectBtn.addEventListener("click", async () => {
+      // Check if MetaMask is installed
+      if (typeof window.ethereum === "undefined") {
+        alert("MetaMask is not installed");
+        return;
+      }
+
+      try {
+        // Request wallet connection
+        const accounts = await window.ethereum.request({
+          method: "eth_requestAccounts",
+        });
+
+        const walletAddress = accounts[0];
+
+        // Save address into input field
+        walletInput.value = walletAddress;
+        document.getElementById("connectWalletBtn").textContent = "Wallet connected";
+
+      } catch (error) {
+        console.error("Wallet connection failed:", error);
+        alert("Wallet connection was cancelled or failed");
+      }
+    });
+  </script>
+  <script type="module" src="storedata.js"></script>
+</body>
+
+</html>
