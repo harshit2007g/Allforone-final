@@ -282,8 +282,7 @@
 
       document.addEventListener("DOMContentLoaded", () => {
         const paymentBtn = document.querySelector(".payment-option--metamask");
-        const connectBtn = document.querySelector(".connect-btn");
-        const voidbtn = document.querySelector(".payment-option");
+        const connectBtn = document.querySelector(".connect-btn");        
         if (!paymentBtn || !connectBtn) return;
 
         paymentBtn.addEventListener("click", () => {
@@ -363,8 +362,6 @@
       // Initialize Firestore
       const db = getFirestore(app);
 
-
-      // db is now your Firestore reference
       const params = new URLSearchParams(window.location.search);
       const campaignId = params.get("id");
 
