@@ -282,7 +282,7 @@
 
       document.addEventListener("DOMContentLoaded", () => {
         const paymentBtn = document.querySelector(".payment-option--metamask");
-        const connectBtn = document.querySelector(".connect-btn");        
+        const connectBtn = document.querySelector(".connect-btn");
         if (!paymentBtn || !connectBtn) return;
 
         paymentBtn.addEventListener("click", () => {
@@ -335,10 +335,6 @@
         const viewTxBtn = document.getElementById("viewTxBtn");
 
         overlay.classList.remove("hidden");
-
-        viewTxBtn.onclick = () => {
-          window.location.href = `transactionhistory.html?id=${campaignId}`;
-        };
       }
 
       // Import Firebase functions
@@ -455,15 +451,6 @@
             // Convert sepolia -> hex
             const value = "0x" +
               BigInt(Math.floor(Number(amount) * 1e18)).toString(16);
-            //testing
-            console.log({
-              rawAmount: amountInput.value,
-              parsedAmount: amount,
-              value,
-              valueType: typeof value
-
-            });
-            //
 
             // Send transaction
             const txHash = await window.ethereum.request({
@@ -493,6 +480,24 @@
           }
 
         });
+      });
+
+      viewTxBtn.addEventListener("click", async () => {
+        console.log("button clicked");
+        try {
+          console.log("about to fetch");
+          const res = await fetch("http://127.0.0.1:5000/sync-donations", {
+            method: "POST",
+            headers: {
+              "x-admin-key": "youareallowed"
+            }
+          });
+
+          const text = await res.text();
+          window.location.href = `transactionhistory.html?id=${campaignId}`;
+        } catch (err) {
+          alert("Sync failed");
+        }
       });
     </script>
 </body>

@@ -2,7 +2,7 @@ import { initializeApp } from
 "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
 
 const firebaseConfig = {
- apiKey: "AIzaSyBxMhTmYG11-1SHBkbfasBccWWfIU4WSa4",
+ apiKey: process.env.FIREBASE_API_KEY,
   authDomain: "cyber-labs-6f3a1.firebaseapp.com",
   projectId: "cyber-labs-6f3a1",
   storageBucket: "cyber-labs-6f3a1.firebasestorage.app",

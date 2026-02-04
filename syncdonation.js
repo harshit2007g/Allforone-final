@@ -1,8 +1,7 @@
+require("dotenv").config();
 const admin = require("firebase-admin");
 const fs = require("fs");
-const serviceAccount = JSON.parse(
-    fs.readFileSync("./serviceAccountkey.json", "utf8")
-);
+const serviceAccount = JSON.parse(process.env.SERVICE_ACCOUNT_KEY);
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
 });
@@ -10,7 +9,7 @@ admin.initializeApp({
 const db = admin.firestore();
 
 
-const ETHERSCAN_API_KEY = "5D3CEFGJ5FMWEJSFWUS7N5DZMD7BHMGS66";
+const ETHERSCAN_API_KEY = process.env.ETHERSCAN_API_KEY;
 const CHAIN_ID = 11155111;
 
 
@@ -129,4 +128,4 @@ async function syncDonations() {
    5. Run
    =============================== */
 
-syncDonations();
+module.exports = syncDonations;
