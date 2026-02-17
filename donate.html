@@ -486,7 +486,7 @@
         try {
           viewTxBtn.textContent = "Please wait.....";
           console.log("about to fetch");
-          const res = await fetch("http://127.0.0.1:5000/sync-donations", {
+          const res = await fetch("/api/sync-donations", {
             method: "POST",
             headers: {
               "x-admin-key": "youareallowed"
