@@ -98,23 +98,10 @@ function renderCampaign(data) {
 
 
 loadCampaign();
-donateBtn.addEventListener("click", async () => {
-  try {
-          viewTxBtn.textContent = "Please wait.....";
-          console.log("about to fetch");
-          const res = await fetch("/api/sync-donations", {
-            method: "POST",
-            headers: {
-              "x-admin-key": "youareallowed"
-            }
-          });
-
-          const text = await res.text();
-          window.location.href = `transactionhistory.html?id=${campaignId}`;
-        } catch (err) {
-          alert("Sync failed");
-        }
+donateBtn.addEventListener("click", () => {
+  window.location.href = `donate.html?id=${campaignId}`;
 });
+
 const history =document.getElementById("history");
 
 history.addEventListener("click",()=>{
